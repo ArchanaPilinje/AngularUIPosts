@@ -1,0 +1,42 @@
+<div>
+
+  <h2 class="text-primary my-4">Sign IN</h2>
+  <hr />
+
+  <form (ngSubmit)="signInSubmit(signInForm)" #signInForm="ngForm">
+      
+      <div class="form-group">
+          <label>User Name</label>
+          <input type="text" class="form-control" placeholder="enter your user name" name="username"
+              #username="ngModel" [(ngModel)]="user.username" required>
+          <small class="text-danger" *ngIf="username.dirty && username.invalid">Username can't be empty</small>
+      </div>
+      <div class="form-group">
+          <label>Password</label>
+          <input type="password" class="form-control" placeholder="enter your password" name="password"
+              #password="ngModel" [(ngModel)]="user.password" required>
+          <small class="text-danger" *ngIf="password.dirty && password.invalid">Password can't be empty</small>
+      </div>
+      <button type="submit" class="btn btn-primary"
+          [disabled]="signInForm.pristine || (signInForm.dirty && signInForm.invalid)">Sign IN</button>
+  </form>
+
+  <app-spinner *ngIf="progressFlag"></app-spinner>
+
+  
+
+  <div class="alert alert-danger my-3" role="alert" *ngIf="errorFlag">
+      <div class="d-flex justify-content-start align-items-center">
+          <i class="material-icons md-28 mr-3">
+              highlight_off
+          </i>
+          <h4 class="alert-heading mb-0">
+              Login unsuccessfull!
+          </h4>
+      </div>
+
+      <hr />
+      <p class="mb-0">Signin not successfull!You have entered the wrong username/password.Please try again</p>
+  </div>
+
+</div>
